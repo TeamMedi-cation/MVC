@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mydbModelStoreContainer" CdmEntityContainer="mydbEntities">
+    <EntitySetMapping Name="Ambulances">
+      <EntityTypeMapping TypeName="mydbModel.Ambulance">
+        <MappingFragment StoreEntitySet="Ambulance">
+          <ScalarProperty Name="AmbulanceID" ColumnName="AmbulanceID" />
+          <ScalarProperty Name="CallCentreID" ColumnName="CallCentreID" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CallCentres">
+      <EntityTypeMapping TypeName="mydbModel.CallCentre">
+        <MappingFragment StoreEntitySet="CallCentre">
+          <ScalarProperty Name="CallCentreID" ColumnName="CallCentreID" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lon" ColumnName="lon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GPs">
+      <EntityTypeMapping TypeName="mydbModel.GP">
+        <MappingFragment StoreEntitySet="GP">
+          <ScalarProperty Name="GPID" ColumnName="GPID" />
+          <ScalarProperty Name="GPFirstname" ColumnName="GPFirstname" />
+          <ScalarProperty Name="GPSurname" ColumnName="GPSurname" />
+          <ScalarProperty Name="GPNumber" ColumnName="GPNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hospitals">
+      <EntityTypeMapping TypeName="mydbModel.Hospital">
+        <MappingFragment StoreEntitySet="Hospital">
+          <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
+          <ScalarProperty Name="GPID" ColumnName="GPID" />
+          <ScalarProperty Name="CallCentreID" ColumnName="CallCentreID" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Conty" ColumnName="Conty" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lon" ColumnName="Lon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medications">
+      <EntityTypeMapping TypeName="mydbModel.Medication">
+        <MappingFragment StoreEntitySet="Medication">
+          <ScalarProperty Name="MedicationID" ColumnName="MedicationID" />
+          <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+          <ScalarProperty Name="Grams" ColumnName="Grams" />
+          <ScalarProperty Name="ml" ColumnName="ml" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedicationHistories">
+      <EntityTypeMapping TypeName="mydbModel.MedicationHistory">
+        <MappingFragment StoreEntitySet="MedicationHistory">
+          <ScalarProperty Name="MedicationHistoryID" ColumnName="MedicationHistoryID" />
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="MedicationHistory1" ColumnName="MedicationHistory" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="Alergies" ColumnName="Alergies" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="mydbModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="MedicationID" ColumnName="MedicationID" />
+          <ScalarProperty Name="GPID" ColumnName="GPID" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Medication" ColumnName="Medication" />
+          <ScalarProperty Name="MedicationInfo" ColumnName="MedicationInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Patient_Medication" TypeName="mydbModel.Patient_Medication" StoreEntitySet="Patient/Medication">
+      <EndProperty Name="Medication">
+        <ScalarProperty Name="MedicationID" ColumnName="MedicationID" />
+      </EndProperty>
+      <EndProperty Name="Patient">
+        <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

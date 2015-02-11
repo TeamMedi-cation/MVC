@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mydbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="mydbModelStoreContainer">
+    <EntitySet Name="Ambulance" EntityType="mydbModel.Store.Ambulance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CallCentre" EntityType="mydbModel.Store.CallCentre" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GP" EntityType="mydbModel.Store.GP" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hospital" EntityType="mydbModel.Store.Hospital" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medication" EntityType="mydbModel.Store.Medication" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MedicationHistory" EntityType="mydbModel.Store.MedicationHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patient" EntityType="mydbModel.Store.Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patient/Medication" EntityType="mydbModel.Store.Patient/Medication" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Ambulance_CallCentre" Association="mydbModel.Store.FK_Ambulance_CallCentre">
+      <End Role="CallCentre" EntitySet="CallCentre" />
+      <End Role="Ambulance" EntitySet="Ambulance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hospital_CallCentre" Association="mydbModel.Store.FK_Hospital_CallCentre">
+      <End Role="CallCentre" EntitySet="CallCentre" />
+      <End Role="Hospital" EntitySet="Hospital" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hospital_GP" Association="mydbModel.Store.FK_Hospital_GP">
+      <End Role="GP" EntitySet="GP" />
+      <End Role="Hospital" EntitySet="Hospital" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicationHistory_Patient" Association="mydbModel.Store.FK_MedicationHistory_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="MedicationHistory" EntitySet="MedicationHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient/Medication_Medication" Association="mydbModel.Store.FK_Patient/Medication_Medication">
+      <End Role="Medication" EntitySet="Medication" />
+      <End Role="Patient/Medication" EntitySet="Patient/Medication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient/Medication_Patient" Association="mydbModel.Store.FK_Patient/Medication_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Patient/Medication" EntitySet="Patient/Medication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_GP" Association="mydbModel.Store.FK_Patient_GP">
+      <End Role="GP" EntitySet="GP" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Ambulance">
+    <Key>
+      <PropertyRef Name="AmbulanceID" />
+    </Key>
+    <Property Name="AmbulanceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CallCentreID" Type="int" Nullable="false" />
+    <Property Name="lat" Type="geometry" Nullable="false" />
+    <Property Name="lon" Type="geometry" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CallCentre">
+    <Key>
+      <PropertyRef Name="CallCentreID" />
+    </Key>
+    <Property Name="CallCentreID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="lat" Type="geometry" Nullable="false" />
+    <Property Name="lon" Type="geometry" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GP">
+    <Key>
+      <PropertyRef Name="GPID" />
+    </Key>
+    <Property Name="GPID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GPFirstname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="GPSurname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="GPNumber" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Hospital">
+    <Key>
+      <PropertyRef Name="HospitalID" />
+    </Key>
+    <Property Name="HospitalID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GPID" Type="int" Nullable="false" />
+    <Property Name="CallCentreID" Type="int" Nullable="false" />
+    <Property Name="HospitalName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Town" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Conty" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Country" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Lat" Type="geometry" />
+    <Property Name="Lon" Type="geometry" />
+  </EntityType>
+  <EntityType Name="Medication">
+    <Key>
+      <PropertyRef Name="MedicationID" />
+    </Key>
+    <Property Name="MedicationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MedicationName" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Grams" Type="decimal" />
+    <Property Name="ml" Type="decimal" />
+  </EntityType>
+  <EntityType Name="MedicationHistory">
+    <Key>
+      <PropertyRef Name="MedicationHistoryID" />
+    </Key>
+    <Property Name="MedicationHistoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PatientID" Type="int" Nullable="false" />
+    <Property Name="MedicationHistory" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Medication" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Alergies" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientID" />
+    </Key>
+    <Property Name="PatientID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MedicationID" Type="int" Nullable="false" />
+    <Property Name="GPID" Type="int" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Address1" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Address2" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Address3" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Medication" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="MedicationInfo" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Patient/Medication">
+    <Key>
+      <PropertyRef Name="PatientID" />
+      <PropertyRef Name="MedicationID" />
+    </Key>
+    <Property Name="PatientID" Type="int" Nullable="false" />
+    <Property Name="MedicationID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Ambulance_CallCentre">
+    <End Role="CallCentre" Type="mydbModel.Store.CallCentre" Multiplicity="1" />
+    <End Role="Ambulance" Type="mydbModel.Store.Ambulance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CallCentre">
+        <PropertyRef Name="CallCentreID" />
+      </Principal>
+      <Dependent Role="Ambulance">
+        <PropertyRef Name="CallCentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hospital_CallCentre">
+    <End Role="CallCentre" Type="mydbModel.Store.CallCentre" Multiplicity="1" />
+    <End Role="Hospital" Type="mydbModel.Store.Hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CallCentre">
+        <PropertyRef Name="CallCentreID" />
+      </Principal>
+      <Dependent Role="Hospital">
+        <PropertyRef Name="CallCentreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hospital_GP">
+    <End Role="GP" Type="mydbModel.Store.GP" Multiplicity="1" />
+    <End Role="Hospital" Type="mydbModel.Store.Hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GP">
+        <PropertyRef Name="GPID" />
+      </Principal>
+      <Dependent Role="Hospital">
+        <PropertyRef Name="GPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicationHistory_Patient">
+    <End Role="Patient" Type="mydbModel.Store.Patient" Multiplicity="1" />
+    <End Role="MedicationHistory" Type="mydbModel.Store.MedicationHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientID" />
+      </Principal>
+      <Dependent Role="MedicationHistory">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient/Medication_Medication">
+    <End Role="Medication" Type="mydbModel.Store.Medication" Multiplicity="1" />
+    <End Role="Patient/Medication" Type="mydbModel.Store.Patient/Medication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medication">
+        <PropertyRef Name="MedicationID" />
+      </Principal>
+      <Dependent Role="Patient/Medication">
+        <PropertyRef Name="MedicationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient/Medication_Patient">
+    <End Role="Patient" Type="mydbModel.Store.Patient" Multiplicity="1" />
+    <End Role="Patient/Medication" Type="mydbModel.Store.Patient/Medication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientID" />
+      </Principal>
+      <Dependent Role="Patient/Medication">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_GP">
+    <End Role="GP" Type="mydbModel.Store.GP" Multiplicity="1" />
+    <End Role="Patient" Type="mydbModel.Store.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GP">
+        <PropertyRef Name="GPID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="GPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
